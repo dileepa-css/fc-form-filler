@@ -80,7 +80,6 @@ async function fillCompanionData() {
     return { year, month, day };
   }
 
-
   async function fillForm() {
     try {
       // console.log('Starting form fill...');
@@ -176,7 +175,10 @@ async function fillCompanionData() {
           await fillFormField(value, 50);
           // element.value = value;
         } else {
-          console.log(selector, `Element not found for selector: ${selector}`);
+          console.error(
+            selector,
+            `Element not found for selector: ${selector}`
+          );
         }
       };
 
@@ -225,34 +227,34 @@ async function fillCompanionData() {
 
 async function fillCreditCardData() {
   try {
-    const creditCardNumber = Array.from(document.querySelectorAll("label"))
-      .find((label) => label.innerText ===  "カード番号")
-      .nextElementSibling;
+    const creditCardNumber = Array.from(
+      document.querySelectorAll("label")
+    ).find((label) => label.innerText === "カード番号").nextElementSibling;
 
-    const cardHolderName = Array.from(document.querySelectorAll("label"))
-      .find((label) => label.innerText ===  "名義人")
-      .nextElementSibling;
+    const cardHolderName = Array.from(document.querySelectorAll("label")).find(
+      (label) => label.innerText === "名義人"
+    ).nextElementSibling;
 
-    const securityCode = Array.from(document.querySelectorAll("label"))
-      .find((label) => label.innerText ===  'セキュリ\nティコード')
-      .nextElementSibling;
+    const securityCode = Array.from(document.querySelectorAll("label")).find(
+      (label) => label.innerText === "セキュリ\nティコード"
+    ).nextElementSibling;
 
     const validPeriod = Array.from(document.querySelectorAll("label"))
-      .find((label) => label.innerText ===  '有効期限')
-      .parentElement.querySelectorAll('select');
+      .find((label) => label.innerText === "有効期限")
+      .parentElement.querySelectorAll("select");
 
     const month = validPeriod[0];
     const year = validPeriod[1];
 
     const formFields = [
       {
-        value: '4242424242424242',
+        value: "4242424242424242",
         selector: {
           node: creditCardNumber,
         },
       },
       {
-        value: 'CSS Tester',
+        value: "CSS Tester",
         selector: {
           node: cardHolderName,
         },
@@ -270,17 +272,12 @@ async function fillCreditCardData() {
         },
       },
       {
-        value: '1234',
+        value: "1234",
         selector: {
           node: securityCode,
         },
       },
-    ]
-
-    console.log("creditCardNumber", creditCardNumber);
-    console.log("cardHolderName", cardHolderName);
-    console.log("year", year);
-    console.log("month", month);
+    ];
 
     const focusAndFill = async (selector, value) => {
       const element = !!selector.node
@@ -293,7 +290,7 @@ async function fillCreditCardData() {
         await fillFormField(value, 50);
         // element.value = value;
       } else {
-        console.log(selector, `Element not found for selector: ${selector}`);
+        console.error(selector, `Element not found for selector: ${selector}`);
       }
     };
 
@@ -301,8 +298,7 @@ async function fillCreditCardData() {
     for (const field of formFields) {
       await focusAndFill(field.selector, field.value);
     }
-
-  } catch(error) {
-    console.log("Could not fill credit card details :",error)
+  } catch (error) {
+    console.error("Could not fill credit card details :", error);
   }
 }
