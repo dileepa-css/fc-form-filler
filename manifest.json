@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Fc Form AutoFiller",
+    "name": "Fc Web Form AutoFiller",
     "version": "1.0",
     "description": "Automatically fills FC Japanese forms with dummy data",
     "permissions": ["activeTab", "scripting"],
