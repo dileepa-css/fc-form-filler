@@ -1,1 +1,1 @@
-Fake form data generator for FEP frontend enrollment
+Fake form data generator for Fanclub frontend enrollment
